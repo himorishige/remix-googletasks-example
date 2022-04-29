@@ -1,3 +1,20 @@
 {
-  "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"]
+  "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"],
+  "plugins": ["import"],
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": [
+          ["builtin", "external", "internal"],
+          "parent",
+          "sibling",
+          "type",
+          "index"
+        ]
+      }
+    ]
+  }
 }
