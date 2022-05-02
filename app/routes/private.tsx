@@ -4,6 +4,7 @@ import { fetchTaskLists } from '~/models/tasklists/tasklists.server';
 import { createTask, fetchTasks, updateTask } from '~/models/tasks';
 import { auth } from '~/utils/auth.server';
 import React from 'react';
+import { Box, Button, Checkbox, Input, Text } from '@mantine/core';
 
 import type { Task } from '~/models/tasks';
 import type { GoogleProfile } from 'remix-auth-google';
@@ -165,9 +166,9 @@ export default function Screen() {
   return (
     <>
       <Form method="post">
-        <button name="action" value="logout">
+        <Button name="action" value="logout" type="submit" variant="outline">
           Log Out
-        </button>
+        </Button>
       </Form>
 
       <hr />
@@ -180,11 +181,11 @@ export default function Screen() {
 
       <div>
         <Form replace method="post">
-          <input type="text" name="title" />
+          <Input type="text" name="title" />
           <input type="hidden" name="taskListId" value={taskListId} />
-          <button type="submit" name="action" value="add">
+          <Button type="submit" name="action" value="add">
             Add Task
-          </button>
+          </Button>
         </Form>
       </div>
 
@@ -212,11 +213,14 @@ export function TaskItem(props: { taskListId: string; task: Task }) {
         <input type="hidden" name="taskListId" value={taskListId} />
         <input type="hidden" name="taskId" value={task.id} />
         <input type="hidden" name="status" value={task.status} />
-        <input
-          type="checkbox"
-          defaultChecked={task.status === 'completed' ? true : false}
-        />{' '}
-        {task.title}
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Checkbox
+            defaultChecked={task.status === 'completed' ? true : false}
+            sx={{ display: 'inline-block' }}
+            mr={2}
+          />
+          <Text>{task.title}</Text>
+        </Box>
       </fetcher.Form>
     </div>
   );

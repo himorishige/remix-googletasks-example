@@ -1,6 +1,8 @@
 import { json } from '@remix-run/node';
 import { Form, useLoaderData } from '@remix-run/react';
 import { auth, getSession } from '~/utils/auth.server';
+import { Button } from '@mantine/core';
+import { BrandGoogle } from 'tabler-icons-react';
 
 import type { LoaderFunction } from '@remix-run/node';
 
@@ -21,7 +23,9 @@ export default function Screen() {
   return (
     <Form method="post" action="/google">
       {error ? <div>{error.message}</div> : null}
-      <button>Sign In with Google</button>
+      <Button leftIcon={<BrandGoogle />} type="submit">
+        Sign In with Google
+      </Button>
     </Form>
   );
 }
